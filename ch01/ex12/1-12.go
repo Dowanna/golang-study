@@ -23,7 +23,8 @@ func main() {
 		convertedQueryMap := convertQueries(r.URL.Query())
 
 		cycles := convertedQueryMap["cycles"]
-		lissajous(w, cycles)
+		res := convertedQueryMap["res"]
+		lissajous(w, cycles, res)
 	})
 	http.HandleFunc("/count", counter)
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
@@ -37,6 +38,10 @@ func convertQueries(queryMap url.Values) map[string]float64 {
 		if vInt, err := strconv.Atoi(v[0]); err == nil {
 			vAsFloat := float64(vInt)
 			convertedMap[k] = vAsFloat
+		} else {
+			if vAsFloat, err := strconv.ParseFloat(v[0], 64); err == nil {
+				convertedMap[k] = vAsFloat
+			}
 		}
 	}
 	return convertedMap
@@ -73,10 +78,10 @@ const (
 	blackIndex = 1
 )
 
-func lissajous(out io.Writer, cycles float64) {
+func lissajous(out io.Writer, cycles float64, res float64) {
 	const (
 		// cycles  = 5 // 発振器 x が完了する周回の回数 res = 0.001 // 回転の分解能
-		res     = 0.001
+		// res     = 0.001
 		size    = 100
 		nframes = 64
 		delay   = 8
