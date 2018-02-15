@@ -8,3 +8,4 @@
 # ---- Doing this to ignore binaries genearted by go build ------
 
 practice/
+*.txt*
