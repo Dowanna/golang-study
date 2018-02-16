@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"hoge"
+	"golang-study/ch01/ex12/hoge"
 	"log"
 	"net/http"
 	"net/url"
