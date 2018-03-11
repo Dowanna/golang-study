@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"goLight/ch02/ex01/tempconv"
+	"goLight/ch02/ex01/src/tempconv"
 	"os"
 	"regexp"
 	"strconv"
