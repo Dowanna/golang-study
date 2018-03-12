@@ -1,11 +1,3 @@
-# ---- Doing this to ignore binaries genearted by go build ------
-# Ignore all
-*
-# Unignore all with extensions
-!*.*
-# Unignore all dirs
-!*/
-# ---- Doing this to ignore binaries genearted by go build ------
-
-practice/
+*.DS_Store
 *.txt
+practice/
