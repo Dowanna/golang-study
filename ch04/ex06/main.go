@@ -6,12 +6,6 @@ import (
   "unicode/utf8"
 )
 
-func main() {
-  unicodes := "a\tb\t\tc  d e"
-  asciis := UnicodeSpaceToAscii([]byte(unicodes))
-  fmt.Printf("%s", asciis)
-}
-
 func UnicodeSpaceToAscii(unicodes []byte) []byte {
   var size int
   var asciis []byte
