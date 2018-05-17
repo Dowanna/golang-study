@@ -23,10 +23,7 @@ func getSha(sha int, text string) string {
     fmt.Println("you selected sha256 and your text was", text)
     convertedByte := sha256.Sum256(textByte)
     return BytesToString(convertedByte[:])
-
-    //こう書けないのはなぜ・・・？
-    //return BytesToString(sha256.Sum256(textByte)[:]) //./main.go:27:49: invalid operation sha256.Sum256(textByte)[:] (slice of unaddressable value)
-  case 384:
+	case 384:
     fmt.Println("you selected sha384 and your text was", text)
     convertedByte := sha512.Sum384(textByte)
     return BytesToString(convertedByte[:])
