@@ -1,15 +1,5 @@
 package ex05  
 
-import (
-  "fmt"
-)
-
-func main() {
-  s := []string{"hoge", "piyo", "hoge", "hoge","fuga"}
-  s = RemoveDup(s)
-  fmt.Printf("%s", s)
-}
-
 func RemoveDup(s []string) []string {
   for i, _ := range s {
     // 重複する要素がある限りはループを回し続ける

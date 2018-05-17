@@ -6,7 +6,7 @@ import (
 
 func TestRemoveDup(t *testing.T) {
   s := []string{"hoge", "hoge", "hoge","fuga"}
-  expected := []string{"hoge", "piyo", "hoge", "fuga"}
+  expected := []string{"hoge", "fuga"}
   s = RemoveDup(s)
   if !sliceEqual(s, expected) {
     t.Errorf("reverse failed!\n got: %s\n expected: %s\n", s, expected)
