@@ -1,8 +1,9 @@
 package main
 
 import (
-	"io"
+	"fmt"
 	"os"
+	"strings"
 
 	. "github.com/golang-study/ch05/errorHandling"
 	"golang.org/x/net/html"
@@ -11,26 +12,26 @@ import (
 func main() {
 	doc, err := html.Parse(os.Stdin)
 	CheckError(err)
-	ShowTexts(os.Stdout, doc)
+	for _, text := range ShowTexts(nil, doc) {
+		if text != "" {
+			fmt.Printf("%v\n", text)
+		}
+	}
 }
 
-func ShowTexts(w io.Writer, n *html.Node) {
+func ShowTexts(list []string, n *html.Node) []string {
 	if n == nil {
-		return
+		return list
 	}
 
 	if n.Type == html.TextNode {
-		// s := strings.TrimSpace(n.Data)
-		io.WriteString(w, n.Data)
-		// s := strings.TrimSpace(n.Data)
-		// s = strings.Trim(s, " \t\n")
-		// textList = append(textList, s)
+		s := strings.TrimSpace(n.Data)
+		list = append(list, s)
 	}
 
 	if !(n.Type == html.ElementNode && (n.Data == "script" || n.Data == "style")) {
-		ShowTexts(w, n.FirstChild)
+		list = ShowTexts(list, n.FirstChild)
 	}
 
-	ShowTexts(w, n.NextSibling)
-	// return ShowTexts(textList, n.NextSibling)
+	return ShowTexts(list, n.NextSibling)
 }
