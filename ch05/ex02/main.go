@@ -8,13 +8,6 @@ import (
 )
 
 func main() {
-	// name := os.Args[1]
-	// f, err := os.Open(name)
-	//
-	// if err != nil {
-	// 	fmt.Errorf("%v", err)
-	// }
-	//
 	doc, _ := html.Parse(os.Stdin)
 
 	fmt.Println("tag\t\tcount")
