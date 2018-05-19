@@ -4,6 +4,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/golang-study/ch05/testCommon/equals"
 	"golang.org/x/net/html"
 )
 
@@ -19,21 +20,8 @@ func TestVisit(t *testing.T) {
 
 		res := Visit(nil, doc)
 
-		if !equals(res, expected) {
+		if !equals.SliceEquals(res, expected) {
 			t.Errorf("expected: %v\n got: %v\n", expected, res)
 		}
 	}
-}
-
-func equals(res, expected []string) bool {
-	if len(res) != len(expected) {
-		return false
-	}
-
-	for i, _ := range expected {
-		if res[i] != expected[i] {
-			return false
-		}
-	}
-	return true
 }
