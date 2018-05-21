@@ -3,22 +3,38 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"net/http"
 	"os"
 	"strings"
 
-	. "github.com/golang-study/ch05/errorHandling"
 	"golang.org/x/net/html"
 )
 
 func main() {
-	doc, err := html.Parse(os.Stdin)
-	CheckError(err)
+	input := os.Args[1]
+	url, e := ParseAndCount(input)
+	if e != nil {
+		fmt.Errorf("failed counting from %s: %v", url, e)
+	}
+}
+
+func ParseAndCount(url string) (string, error) {
+	r, e := http.Get(url)
+	if e != nil {
+		return url, e
+	}
+
+	doc, e := html.Parse(r.Body)
+	if e != nil {
+		return url, e
+	}
 
 	counts := CountWordsAndImages(map[string]int{"words": 0, "images": 0}, doc)
 
-	for e, count := range counts {
-		fmt.Printf("%s: %d\n", e, count)
+	for element, count := range counts {
+		fmt.Printf("%s: %d\n", element, count)
 	}
+	return url, nil
 }
 
 func CountWordsAndImages(counts map[string]int, n *html.Node) map[string]int {
