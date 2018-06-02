@@ -14,7 +14,7 @@ func main() {
 	CheckError(err)
 	for _, text := range ShowTexts(nil, doc) {
 		if text != "" {
-			fmt.Printf("%v\n", text)
+			fmt.Fprintf(writer, "%v\n", text)
 		}
 	}
 }

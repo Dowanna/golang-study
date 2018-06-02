@@ -12,7 +12,7 @@ func main() {
 
 	fmt.Println("tag\t\tcount")
 	for tag, count := range CountTags(make(map[string]int), doc) {
-		fmt.Printf("%s\t\t%d\n", tag, count)
+		fmt.Fprintf(writer, "%s\t\t%d\n", tag, count)
 	}
 }
 

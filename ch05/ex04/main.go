@@ -12,7 +12,7 @@ func main() {
 	doc, err := html.Parse(os.Stdin)
 	CheckError(err)
 	for _, list := range Visit(nil, doc) {
-		fmt.Printf("%s\n", list)
+		fmt.Fprintf(writer, "%s\n", list)
 	}
 }
 

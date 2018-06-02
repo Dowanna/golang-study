@@ -32,7 +32,7 @@ func ParseAndCount(url string) (string, error) {
 	counts := CountWordsAndImages(map[string]int{"words": 0, "images": 0}, doc)
 
 	for element, count := range counts {
-		fmt.Printf("%s: %d\n", element, count)
+		fmt.Fprintf(writer, "%s: %d\n", element, count)
 	}
 	return url, nil
 }
