@@ -18,21 +18,19 @@ const depth = 3 //深く潜りすぎてテザリング容量が死にかける�
 func main() {
 	host = "https://golang.org"
 	breadthFirst(crawl, []string{host})
-	// fmt.Printf("%s", paths)
-	// for _, path := range paths {
-	// 	os.MkdirAll("."+path, 0777)
-	// }
 }
 
 func crawl(url string) []string {
 
 	if strings.HasPrefix(url, host) {
+		path := strings.Split(url, host)[1]
+
 		if strings.HasSuffix(url, "/") {
-			paths = append(paths, strings.Split(url, host)[1])
-			os.MkdirAll("."+strings.Split(url, host)[1], 0777)
+			paths = append(paths, path)
+			os.MkdirAll("."+path, 0777)
 		} else {
 			res, _ := http.Get(url)
-			f, _ := os.Create("." + strings.Split(url, host)[1])
+			f, _ := os.Create("." + path)
 
 			defer f.Close()
 			defer res.Body.Close()
