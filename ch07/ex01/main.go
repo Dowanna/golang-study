@@ -9,10 +9,10 @@ type WordCounter int
 type LineCounter int
 
 func main() {
-	p := []byte("世界　世界　世界")
-	var c WordCounter
-	c.Write(p)
-	fmt.Printf("%v", c)
+	p := []byte("世界\n世界\n世界")
+	var l LineCounter
+	l.Write(p)
+	fmt.Printf("%v", l)
 }
 
 func (c *WordCounter) Write(p []byte) (int, error) {
@@ -25,6 +25,15 @@ func (c *WordCounter) Write(p []byte) (int, error) {
 		}
 
 		ploc = ploc[adv:]
+	}
+	return 0, nil
+}
+
+func (l *LineCounter) Write(p []byte) (int, error) {
+	for _, b := range p {
+		if b == '\n' {
+			*l += 1
+		}
 	}
 	return 0, nil
 }
